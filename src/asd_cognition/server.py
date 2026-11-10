@@ -4,7 +4,8 @@ from datetime import datetime as dt
 from pathlib import Path
 from threading import Thread
 
-from asd_cognition.cli import CommandLineInterface
+import click
+
 from asd_cognition.utils.listener import Listener
 
 Socket = socket.socket
@@ -20,8 +21,6 @@ class EncodingSizes:
 TIMESTAMP_OFFSET = EncodingSizes.USER_ID
 THOUGHT_SIZE_OFFSET = TIMESTAMP_OFFSET + EncodingSizes.TIMESTAMP
 THOUGHT_OFFSET = THOUGHT_SIZE_OFFSET + EncodingSizes.THOUGHT_SIZE
-
-cli = CommandLineInterface()
 
 
 def write_to_file(user_id: int, ts: int, thought: str, data_dir: str):
@@ -102,7 +101,9 @@ def parse(data: bytes) -> tuple[int, int, str]:
         raise ValueError(e)
 
 
-@cli.command
+@click.command
+@click.option("--address", required=True, help="Server address")
+@click.option("--data", required=True, help="Data directory")
 def run(address, data):
     """Run the server."""
     address, port = address.split(":")
@@ -110,4 +111,4 @@ def run(address, data):
 
 
 if __name__ == "__main__":
-    cli.main()
+    run()

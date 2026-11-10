@@ -1,10 +1,9 @@
 import socket
 from datetime import datetime as dt
 
-from asd_cognition.cli import CommandLineInterface
-from asd_cognition.utils.connection import Connection
+import click
 
-cli = CommandLineInterface()
+from asd_cognition.utils.connection import Connection
 
 
 def upload_thought(address, user_id: int, thought: str):
@@ -20,13 +19,16 @@ def upload_thought(address, user_id: int, thought: str):
     conn.send(data)
 
 
-@cli.command
+@click.command()
+@click.option("--address", required=True, help="Server address")
+@click.option("--user", required=True, help="User ID")
+@click.option("--thought", required=True, help="Thought to upload")
 def upload(address, user, thought: str):
     try:
         upload_thought(to_address(address), int(user), thought)
         print("done")
     except Exception as error:
-        print(f"ERROR: {error}")
+        print(f"ERROR: {type(error).__name__}: {error}")
         return 1
 
 
@@ -40,4 +42,4 @@ def to_address(address_str: str) -> tuple[str, int]:
 
 
 if __name__ == "__main__":
-    cli.main()
+    upload()

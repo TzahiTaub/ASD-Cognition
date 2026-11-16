@@ -2,6 +2,8 @@
 
 Advanced system design (ASD) course project.
 
+[![codecov](https://codecov.io/github/TzahiTaub/ASD-Cognition/graph/badge.svg)](https://codecov.io/github/TzahiTaub/ASD-Cognition)
+
 ## Installation
 
 1. Clone the repository and enter it:

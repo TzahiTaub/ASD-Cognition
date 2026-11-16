@@ -21,3 +21,6 @@ dev = ["pytest"]
 
 [tool.pytest]
 ini_options.pythonpath = ["src"]
+
+[tool.uv]
+required-version = ">=0.13.5,<0.14"

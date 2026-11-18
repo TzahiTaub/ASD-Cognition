@@ -68,6 +68,13 @@ def handle_connection_until_schema_ends(
 
 
 def run_server(address: Address, data_dir: str):
+    """
+    Run the server that listens for incoming connections and handles them.
+
+    Args:
+        address: A tuple of (host, port) representing the server address.
+        data_dir: Directory where the received thoughts will be stored.
+    """
     host, port = address
     Path(data_dir).mkdir(parents=True, exist_ok=True)
     with Listener(port, host) as server:

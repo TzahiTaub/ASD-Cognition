@@ -7,6 +7,12 @@ from asd_cognition.utils.connection import Connection
 
 
 def upload_thought(address, user_id: int, thought: str):
+    """
+    Upload a thought to the server at the given address.
+
+    Args:
+        address: A tuple of (host, port) representing the server address.
+    """
     serv_socket = socket.socket()
     serv_socket.connect(address)
 
